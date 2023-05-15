@@ -43,6 +43,8 @@ This forms the backbone of the WFC algorithm, since at each step we look for the
 We repeat this process until each wave space is collapsed hopefully resulting in a perfectly generated map!
 
 
+There are several factors that may be preventing the network from reaching this goal, including some conflicts between the actual training and the theoretical manifold we want to map the generation process to in the noise. 
+Some improvements also include swapping from convolutional layers to attention layers, since attention networks excel at overfitting and biasing, which is well suited for a network learning on user specific tilesets. 
 
 
 -Motivations for this project:
