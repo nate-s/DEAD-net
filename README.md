@@ -1,9 +1,27 @@
 # DEAD-net
-Wave Function Collapse with deep equilibrium diffusion networks: Deep Equilibrium Adjacent Diffusion Network (DEAD-Net) 
+Deep Equilibrium Adjacent Diffusion Network (DEAD-Net) 
 
-deadnet.ipynb is the most current version. It's still a deep equilibrium method using a GRU network, but the GRU is 
-pretty heavily modified. 
-Highest performing network uses curriculum learning to consistently score > 5 but < 6 correct tiles out of 9.
+
+Summary:
+
+
+This is a GRU based Deep Equilibirum network that solves Wave Function Collapse problems in real time by parallelizing the map generation process. 
+It is inspired by the deep equilibrium model formulated in the RAFT optical flow network [1]. 
+
+
+Wave Function Collapse (WFC) is a powerful procedural generation algorithm that creates maps according to a set of tile placement rules. 
+This rule based solving is quite intuitive and easy to code but is formualted as a sequential problem, and therefore generation time is heavily dependant on map size.
+Neural networks are very good at content generation and built up of easily parallelized matrix operations, so it would be ideal if we could apply them here.
+However, wave function collapse tends to appear stochastic depending on the rules of the tile set, which Variational Auto Encoders and GANs have a very difficult time recreating. 
+The solution here is to treat the map as a 3D block of noise where the span of width and height represent the map and the depth represents the one hot encoding vector of possible tiles.
+The Deep Equilibrium model refines this block of noise for a set number of iterations hopefully resulting in a collapsed wave space.
+To guide this learning process we thought of using a diffusion methodology but the results varied with this approach.
+
+
+The highest performing network uses curriculum learning to consistently score 5 < # valid < 6 correct tiles out of 9, and comes in at 250 Kb. 
+We found that the network learns well on 3x3 tile space, and the testing error (# of valid tiles / 9) translates to maps of arbitrary size.
+The maps generated also have a mean tile choice and variance approximately equal to the dataset's which indicates it is not learning trivial solutions. 
+As such, if we can get to 9/9 correctly placed tiles then we have a neural network that can solve a near arbitrarily sized map as a parallel process in real time ( time << 1s) as opposed to several seconds.
 
 
 
@@ -52,5 +70,6 @@ As such, we belive that if we can imrpove the network architecture/ training rou
 
 
 
+1. RAFT optical flow: https://arxiv.org/pdf/2003.12039.pdf
 
 
