@@ -24,6 +24,8 @@ The maps generated also have a mean tile choice and variance approximately equal
 As such, if we can get to 9/9 correctly placed tiles then we have a neural network that can solve a near arbitrarily sized map as a parallel process in real time ( time << 1s) as opposed to several seconds.
 
 
+There are several factors that may be preventing the network from reaching this goal, including some conflicts between the actual training and the theoretical manifold we want to map the generation process to in the noise. 
+Some improvements also include swapping from convolutional layers to attention layers, since attention networks excel at overfitting and biasing, which is well suited for a network learning on user specific tilesets. 
 
 
 -Background on WFC:
@@ -42,9 +44,6 @@ This means there are less possible tiles we can place in those spaces, or conver
 This forms the backbone of the WFC algorithm, since at each step we look for the wave space with greatest certainty and collapse the function there.
 We repeat this process until each wave space is collapsed hopefully resulting in a perfectly generated map!
 
-
-There are several factors that may be preventing the network from reaching this goal, including some conflicts between the actual training and the theoretical manifold we want to map the generation process to in the noise. 
-Some improvements also include swapping from convolutional layers to attention layers, since attention networks excel at overfitting and biasing, which is well suited for a network learning on user specific tilesets. 
 
 
 -Motivations for this project:
